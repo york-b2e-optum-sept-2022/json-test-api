@@ -1,9 +1,11 @@
 package net.yorksoultions.jsonapi;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
 @RestController
@@ -35,5 +37,25 @@ public class JsonController {
     @GetMapping({"/time", "/date"})
     public HashMap time() {
         return this.jsonService.time();
+    }
+
+    @GetMapping("/headers")
+    public HashMap headers(HttpServletRequest request) {
+        return this.jsonService.headers(request);
+    }
+
+    @GetMapping("/cookie")
+    public HashMap cookie(HttpServletResponse response) {
+        return this.jsonService.cookie(response);
+    }
+
+    @GetMapping("/md5")
+    public HashMap md5(@RequestParam String text){
+        return this.jsonService.md5(text);
+    }
+
+    @GetMapping("/validate")
+    public HashMap validate(@RequestParam String json) {
+        return this.jsonService.validate(json);
     }
 }
